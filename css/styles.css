@@ -1,0 +1,98 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F7FAFC;
+  font-size: 13px;
+  min-width: 320px;
+}
+
+ul {
+  margin: .25rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul + ul {
+  border-top: 1px solid #E2E8F0;
+  padding-top: .25rem;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  font-family: Roboto, system-ui, sans-serif;
+  cursor: pointer;
+  padding: .25rem 1rem .25rem 3rem;
+  position: relative;
+}
+
+li:hover {
+  background-color: #E2E8F0;
+}
+
+span {
+  flex: 1;
+}
+
+i {
+  position: absolute;
+  left: 1rem;
+  width: 16px;
+  height: 16px;
+  background-size: 100%;
+}
+
+small {
+  margin-left: .5rem;
+  color: #A0AEC0;
+  align-self: flex-end;
+}
+
+svg {
+  display: block;
+}
+
+.icon.mobile {
+  background-image: url('../icons/phone_iphone-24px.svg');
+}
+
+.icon.mobile-landscape {
+  background-image: url('../icons/phone_iphone-24px.svg');
+  transform: rotate(-90deg);
+}
+
+.icon.tablet {
+  background-image: url('../icons/tablet_mac-24px.svg');
+}
+
+.icon.tablet-landscape {
+  background-image: url('../icons/tablet_mac-24px.svg');
+  transform: rotate(-90deg);
+}
+
+.icon.laptop {
+  background-image: url('../icons/laptop-24px.svg');
+}
+
+.icon.desktop {
+  background-image: url('../icons/desktop_mac-24px.svg');
+}
+
+.icon.third-left {
+  background-image: url('../icons/third_left-24px.svg');
+}
+.icon.half-left {
+  background-image: url('../icons/half_left-24px.svg');
+}
+.icon.third-right {
+  background-image: url('../icons/third_right-24px.svg');
+}
+.icon.half-right {
+  background-image: url('../icons/half_right-24px.svg');
+}
