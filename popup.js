@@ -55,7 +55,7 @@ let config = {
       height: 1440
     }
   ],
-  sizes: [
+  positions: [
     {
       icon: 'third-left',
       title: 'Left 1/3',
@@ -84,25 +84,33 @@ let config = {
 };
 
 function resizeWindow(props) {
-  const windowNewProps = {
-    width: props.width,
-    height: props.height,
-    focused: true
-  };
+  const {
+    width,
+    height,
+    left,
+    top
+  } = props;
 
   const windowCurrent = chrome.windows.WINDOW_ID_CURRENT;
 
   chrome.windows.update(
     windowCurrent,
-    windowNewProps
+    {
+      width,
+      height,
+      left,
+      top,
+      focused: true
+    }
   );
 }
 
-function appendResolutions() {
-  let resolutionsContainer = document.querySelector("#resolutions");
+function buildResolutions() {
+  const resolutionsContainer = document.querySelector("#resolutions");
+  
+  const createItem = (props) => {
+    const li = document.createElement('li');
 
-  let createItem = (props) => {
-    let li = document.createElement('li');
     li.innerHTML = `
       <i class="icon ${props.icon}"></i>
       <span>${props.title}</span>
@@ -123,41 +131,53 @@ function appendResolutions() {
   });
 }
 
-function appendSizes() {
-  let sizesContainer = document.querySelector("#sizes");
+function buildPositions() {
+  const positionsContainer = document.querySelector("#positions");
   
-  let createItem = (props) => {
-    let li = document.createElement('li');
-    const WW = Math.round(window.screen.availWidth * props.factor);
-    const WH = Math.round(window.screen.availHeight);
+  const createItem = (props) => {
+    const li = document.createElement('li');
 
-    if (props.stick === 'right') {
-      newLeft = window.screen.availWidth - Math.round(WW);
-    } else {
-      newLeft = 0;
+    const newWidth = Math.round(window.screen.availWidth * props.factor);
+    const newHeight = window.screen.availHeight;
+
+    const getLeft = () => {
+      if (props.stick == 'right') {
+        return window.screen.availWidth - Math.round(newWidth);
+      } else {
+        return 0;
+      }
     }
 
     li.addEventListener('click', () => {
-      resizeWindow({left: newLeft, width: WW, height: WH, ...props});
+      resizeWindow({
+        width: newWidth,
+        height: newHeight,
+        left: getLeft(),
+        top: 0
+      });
     })
 
     li.innerHTML = `
       <i class="icon ${props.icon}"></i>
       <span>${props.title}</span>
-      <small>${WW} x ${WH} px</small>
+      <small>${newWidth} x ${newHeight} px</small>
     `;
 
     return li;
   }
 
-  config.sizes.map((item) => {
+  config.positions.map((item) => {
     let li = createItem(item);
     
-    sizesContainer.append(li);
+    positionsContainer.append(li);
   });
 }
 
+function buildMenu() {
+  buildResolutions();
+  buildPositions();
+}
+
 window.addEventListener('load', () => {
-  appendResolutions();
-  appendSizes();
+  buildMenu();
 });
