@@ -10,12 +10,6 @@
     "default_title": "Resize the Window",
     "default_popup": "html/popup.html"
   },
-  "content_scripts": [
-    {
-      "matches": ["http://*/*"],
-      "js": ["contentScript.js"]
-    }
-  ],
   "icons": {
     "16": "images/Icon-16.png",
     "48": "images/Icon-48.png",
