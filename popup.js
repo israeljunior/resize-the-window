@@ -3,14 +3,14 @@ let config = {
     {
       title: 'Mobile',
       icon: 'mobile',
-      width: 320,
-      height: 568
+      width: 375,
+      height: 667
     },
     {
       title: 'Mobile landscape',
       icon: 'mobile-landscape',
-      width: 375,
-      height: 667
+      width: 667,
+      height: 375
     },
     {
       title: 'Tablet',
